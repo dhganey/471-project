@@ -1,29 +1,37 @@
-\documentclass[12pt]{article}
 
-%\usepackage{times} %for Times New Roman, if required
-\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry} %adjust margins. TODO: hack to fix large top margin
-\usepackage{setspace} %allows doublespacing, onehalfspacing, singlespacing
-\usepackage{enumitem} %for continuing lists
-\usepackage{titling} %for moving the title
-\usepackage[normalem]{ulem} %for underlining
-\usepackage{graphicx} %for images
-\usepackage{float} %images
+\documentclass[11pt,journal]{IEEEtran}
+
+
+\usepackage{cite}
+\usepackage[pdftex]{graphicx}
+\usepackage[tight,footnotesize]{subfigure}
+\usepackage{float}
+\usepackage{fixltx2e}
+\usepackage{url}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
 
 \begin{document}
 
-\begin{spacing}{.4}
-\setlength{\droptitle}{-7em}
 \title{CSE 471 Project Writeup \\ Team Name}
-\author{David Ganey \and Kerry Martin \and Evan Stoll \and Michael Theut \and Ben Roos}
+
+\author{\IEEEauthorblockN{David Ganey, Kerry Martin, Evan Stoll, Michael Theut, and Ben Roos\\}
+\IEEEauthorblockA{School of Computing, Informatics and\\Decision Systems Engineering\\
+Arizona State University\\
+CSE 471\\}
+}
+
+% make the title area
 \maketitle
-\newpage
-\end{spacing}
 
-\begin{spacing}{1.5}
+\renewcommand{\abstractname}{Executive Summary}
+\begin{abstract}
+TODO -- this executive summary should take up the entire page
+\end{abstract}
 
-\tableofcontents
-\listoffigures
-\listoftables
+\IEEEpeerreviewmaketitle
 
 \section{Part 1}
 \section{Part 2}
@@ -45,7 +53,7 @@ It is this method which is proposed to solve the task given by the CEO. Using th
 
 \begin{figure}[H]
 \centering
-    \includegraphics[scale=.5]{images/wekaexplorer}
+    \includegraphics[width=3in]{images/wekaexplorer}
 \caption{The Weka Explorer interface}
 \label{wekaexplorer}
 \end{figure}
@@ -58,13 +66,14 @@ Support Vector Machines (SVM) are, according to Russell and Norvig, ``the most p
 \par
 To use an SVM on the data set provided by the CEO, Weka supports the addition of a library called libsvm. This Java library contains an implementation of the SVM algorithm which hooks into the Weka Explorer interface. The team will set the Explorer to use varying numbers of crossfold validation passes, in order to evaluate the classifier. This will split the dataset, train the SVM with a subset of the dataset, and then evaluate the SVM's effectiveness at predicting the card issuance decision by comparing the SVM's predictions to the actual data. The results from running the libsvm algorithm on the dataset are shown in the table below:
 
-\begin{table}[h]
-{\renewcommand{\arraystretch}{2}%
-	\begin{tabular}{l|l|l|l}
+\begin{table}[H]
+{\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{|l|l|l|l|}
+\hline
 Crossfold validations         & 5             & 10            & 15            \\ \hline
 Time taken to build model (s) & .19           & .24           & .19           \\ \hline
 Correctly classified (\%)     & 382 (55.36\%) & 385 (55.80\%) & 384 (55.65\%) \\ \hline
-Incorrectly classified (\%)   & 308 (44.64\%) & 305 (44.20\%) & 306 (44.35\%)
+Incorrectly classified (\%)   & 308 (44.64\%) & 305 (44.20\%) & 306 (44.35\%) \\ \hline
 \end{tabular}} \quad
 \caption{A table showing the results of the libsvm applied to the data set}
 \end{table}
@@ -76,13 +85,14 @@ Another type of machine learning algorithm is called a ``multilayer perceptron.'
 \par
 The multilayer perceptron is significantly more complex than the SVM, but Weka does include an implementation in the Explorer. Using the same technique as above, the team will evaluate this algorithm with various levels of crossfold validation to determine the optimal setting. The results are seen below:
 
-\begin{table}[h]
-{\renewcommand{\arraystretch}{2}%
-	\begin{tabular}{l|l|l|l}
+\begin{table}[H]
+{\renewcommand{\arraystretch}{1.2}%
+	\begin{tabular}{|l|l|l|l|}
+\hline
 Crossfold validations         & 5             & 10            & 15            \\ \hline
 Time taken to build model (s) & 8.46          & 8.47          & 8.51          \\ \hline
 Correctly classified (\%)     & 584 (84.64\%) & 572 (82.90\%) & 572 (82.90\%) \\ \hline
-Incorrectly classified (\%)   & 106 (15.36\%) & 118 (17.10\%) &           118 (17.10\%)   
+Incorrectly classified (\%)   & 106 (15.36\%) & 118 (17.10\%) &           118 (17.10\%)  \\ \hline
 \end{tabular}
 } \quad
 \caption{A table showing the results of the multilayer perceptron applied to the data set}
@@ -92,10 +102,80 @@ Once again, it is clear that adjusting the number of crossfold validations has l
 \par
 Despite the lack of variability among the validation numbers, we can see immediately that the multilayer perceptron is a good choice for the CactusCard company. In all cases, the success of the classifier was above the criteria set above in Section \ref{testplan}. The MLP algorithm averaged approximately 83\% correctness, which is significantly higher than random chance. This algorithm would be a good choice for future data sets, where it could use the information it learned from this training set to choose who receives a card.
 
-\section{Part 3}
-\section{References}
-\section{Appendices}
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command, the
+% \label for the overall figure must come after \caption.
+% \hfil must be used as a separator to get equal spacing.
+% The subfigure.sty package works much the same way, except \subfigure is
+% used instead of \subfloat.
+%
+%\begin{figure*}[!t]
+%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
 
-\end{spacing}
+\section{Conclusion}
+The conclusion goes here.
+
+
+
+
+% conference papers do not normally have an appendix
+
+
+% use section* for acknowledgement
+\section*{Acknowledgment}
+
+
+The authors would like to thank...
+
+
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+\begin{thebibliography}{1}
+
+\bibitem{IEEEhowto:kopka}
+H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+\end{thebibliography}
+
+
+
+% that's all folks
 \end{document}
+
 
