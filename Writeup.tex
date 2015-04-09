@@ -18,7 +18,7 @@
 \title{CSE 471 Project Writeup \\ Team 2}
 
 \author{\IEEEauthorblockN{David Ganey, Kerry Martin, Evan Stoll, Michael Theut, and Ben Roos\\}
-\IEEEauthorblockA{School of Computing, Informatics and\\Decision Systems Engineering\\
+\IEEEauthorblockA{School of Computing, Informatics and Decision Systems Engineering\\
 Arizona State University\\
 CSE 471\\}
 }
@@ -28,13 +28,21 @@ CSE 471\\}
 
 \renewcommand{\abstractname}{Executive Summary}
 \begin{abstract}
-TODO -- this executive summary should take up the entire page
+The CEO of CactusCard has commissioned a team to solve several problems facing the up-and-coming financial company. The company is in the process of releasing a new card, called the CactusCardPlus. In order for this new product to be a success, the CEO recognizes that CactusCard Credit must accomplish three distinct goals. First, the company needs to successfully market the new card, through both traditional strategies and in particular to users of social media. In addition to a powerful marketing campaign, the company must ensure it makes good decisions about which applicants are deserving of a line of credit. Failing to do this would put the company at a disadvantage, relative to the numerous credit agencies who do use data to make credit decisions. Finally, the success of the product hinges on its ability to protect users (and the company) from credit card fraud. As such, the team must be prepared to counter fraudulent users through a variety of strategies.
+\par
+These tasks will be undertaken by a team of computer science students with knowledge of artificial intelligence. Using search algorithms, the team will maximize the marketing potential of the card. Using machine learning techniques, the team will utilize data to accurately predict which applicants will best utilize their line of credit. Using game theory, the team will develop successful counter-fraud strategies which can be used to protect the company. 
+\par
+Paragraph(s) about the marketing part
+\par
+After devising a successful marketing strategy, the team turned its focus to the determination of credit worthiness. As seen below in Section \ref{part2}, the team used a well-known machine learning library called Weka to run various machine learning algorithms on the data set provided. This data set, which contained 15 anonymized credit attributes plus whether or not that individual was given a card, was used to train learning machines which were then evaluated on their ability to accurately predict the issuance decision. The team found that a machine running the Multilayer Perceptron algorithm was the most successful at predicting credit decisions and would serve the company well in the future.
+\par
+Paragraph(s) about the game theory part
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
 
-\section{Part 1}
-\section{Part 2}
+\section{Part 1} \label{part1}
+\section{Part 2} \label{part2}
 Part 2 of the project describes another task given by the CEO of the CactusCard Credit Company, wherein a program should be developed to provide ``a \emph{machine learning based approach} to identify individuals who should/should not be given the CactusCardPlus.'' This section will formulate this problem and describe the steps taken to solve it.
 
 \subsection{Problem Formulation}
@@ -102,27 +110,7 @@ Once again, it is clear that adjusting the number of crossfold validations has l
 \par
 Despite the lack of variability among the validation numbers, we can see immediately that the multilayer perceptron is a good choice for the CactusCard company. In all cases, the success of the classifier was above the criteria set above in Section \ref{testplan}. The MLP algorithm averaged approximately 83\% correctness, which is significantly higher than random chance. This algorithm would be a good choice for future data sets, where it could use the information it learned from this training set to choose who receives a card.
 
-% An example of a double column floating figure using two subfigures.
-% (The subfig.sty package must be loaded for this to work.)
-% The subfigure \label commands are set within each subfloat command, the
-% \label for the overall figure must come after \caption.
-% \hfil must be used as a separator to get equal spacing.
-% The subfigure.sty package works much the same way, except \subfigure is
-% used instead of \subfloat.
-%
-%\begin{figure*}[!t]
-%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
-%\label{fig_second_case}}}
-%\caption{Simulation results}
-%\label{fig_sim}
-%\end{figure*}
-%
-% Note that often IEEE papers with subfigures do not employ subfigure
-% captions (using the optional argument to \subfloat), but instead will
-% reference/describe all of them (a), (b), etc., within the main caption.
+\section{Part 3} \label{part3}
 
 \section{Conclusion}
 The conclusion goes here.
