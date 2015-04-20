@@ -135,6 +135,41 @@ Once again, it is clear that adjusting the number of crossfold validations has l
 Although no difference between the columns in Table \ref{fig:mlp} is visible, we can see immediately that the multilayer perceptron is a good choice for the CactusCard company. In all cases, the success of the classifier was above the criteria set above in Section \ref{testplan}. The MLP algorithm averaged approximately 83\% correctness, which is significantly higher than random chance. This algorithm would be a good choice for future data sets, where it could use the information it learned from this training set to choose who receives a card.
 
 \section{Part 3} \label{part3}
+\subsection{Dominant Strategy}
+
+Whenever this game is played, CactusCard can not make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amound of time possible. The most cost-effective way to make sure the game isn't played very longly is to make sure the attacker isn't making any money, and then minizing our cost while still ensuring that the attacker isn't making money.
+\par
+So the goal is to defend the number of attacks that will maxamize his losses and minimize the money we spend. 
+\par
+The first priority is to ensure the attacker is losing money. This is computed through determining the expected value. Once we get him losing money, we need to find the optimal amount of vectors to defend that will miniminze out losses. The following is our findings when the attacker attacks 1, 2, and 10 vectors.
+\par
+assuming:
+attacker = 1
+catk = 1000
+\par
+cost results: 
+
+Defender=> assuming they only attack one vector, then we're going to average out to about -$10000 anyway we play, no matter what the other variables are. The best resutls I found were defending 97 attacks. That way, the attacker will average out at -$797.98 and the defender will average out at -$9902.02.
+\par
+assuming:
+attacker = 2
+catk = 500
+\par
+cost results: 
+
+Defender=> The attacker's next best move is to attack 2 vectors. This time, the most cost effective way to ensure that he doesn't average out to make any money is to defend 68 vectors. This averages out to the defender losing $41.43 and the attacker losing $41.43 and the defender losing $7758.77
+\par
+assuming:
+attacker = 10
+catk = 300
+\par
+cost results: 
+
+Defender=> This time the attacker attacks 10 vectors. The best response when the defender is paying $300 per attack is to defend 22 vectors. This still gives a likelyhood of defense at 92.96% and averages out the defender to lose $2192.31 per round the defender to lose $2907.69
+\par
+Overall, the reasonable investment for the company entirely depends on the amount of attack vectors that the attacker decides to play. The fewer he plays, the more expensisve it is for the company.
+
+
 
 \section{Conclusion} \label{conclusion}
 The conclusion goes here.
