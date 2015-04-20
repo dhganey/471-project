@@ -21,19 +21,27 @@ public class AStarSolver {
         // add initial state to the queue
         frontier.offer(initialState);
         
-        while (!frontier.isEmpty()) {           
+        while (!frontier.isEmpty()) {
+            System.out.println();
+            
             State current = frontier.poll();
             System.out.println("Started next iteration with depth " + current.getDepth());
+            System.out.println("Looking at person " + current.person);
+            
+            // inspect the frontier
+            System.out.println("The estimated reward for this state is " + current.getHeuristicReward());
+            System.out.println("The total number of people exposed is " + current.getExposedToCard().size());
+            
             if (current.isGoal()) {
-                System.out.println("Just found goal");
-                for (int guy : people.keySet()) {
-                    System.out.print(guy + ": ");
-                    HashSet<Integer> frs = people.get(guy);
-                    for (int fr : frs) {
-                        System.out.print(fr + " ");
-                    }
-                    System.out.println();
-                }
+//                System.out.println("Just found goal");
+//                for (int guy : people.keySet()) {
+//                    System.out.print(guy + ": ");
+//                    HashSet<Integer> frs = people.get(guy);
+//                    for (int fr : frs) {
+//                        System.out.print(fr + " ");
+//                    }
+//                    System.out.println();
+//                }
                 return current;
             }
             
@@ -49,14 +57,14 @@ public class AStarSolver {
             HashMap<Integer, Double> exposedToCard = current.getExposedToCard();
             for (Integer person : people.keySet()) {
                 if (!givenCard.contains(person) && !exposedToCard.containsKey(person)) {
-                    System.out.println("Found person: " + person);
+//                    System.out.println("Found person: " + person);
                     HashSet<Integer> newGivenCard = (HashSet)givenCard.clone();
                     HashMap<Integer, Double> newExposedToCard = new HashMap<>();
                     newExposedToCard.putAll(exposedToCard);
                     newGivenCard.add(person);
                     HashSet<Integer> friends = people.get(person);
                     double pAdoption = Final_Project_Part_1.calcPAdoption(givenCard.size(), exposedToCard.size());
-                    System.out.println("pAdoption for friends of " + person + " is " + pAdoption);
+//                    System.out.println("pAdoption for friends of " + person + " is " + pAdoption);
                     for (int friend : friends) {
                         if (!newExposedToCard.containsKey(friend)) {
                             // will need to calculate actual cost later, just using 0.0 for now because it doesn't matter
@@ -67,12 +75,13 @@ public class AStarSolver {
                     double hReward = Final_Project_Part_1.calcAStarReward(newExposedToCard, people.size()-newExposedToCard.size());
                     State newState = new State(newGivenCard, newExposedToCard, reward, hReward, current.getDepth()+1);
                     newState.parent = current;
-                    System.out.println("Added state to frontier: ");
-                    for (int guy : newState.getGivenCard()) {
-                        System.out.println(guy);
-                    }
-                    System.out.println("Reward = " + newState.getReward());
-                    System.out.println("Priority Queue size = " + frontier.size());
+                    newState.person = person;
+//                    System.out.println("Added state to frontier: ");
+//                    for (int guy : newState.getGivenCard()) {
+//                        System.out.println(guy);
+//                    }
+//                    System.out.println("Reward = " + newState.getReward());
+//                    System.out.println("Priority Queue size = " + frontier.size());
                     frontier.offer(newState);
                 }
             }

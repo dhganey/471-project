@@ -59,6 +59,8 @@ public class Final_Project_Part_1 {
         State initialState = new State(new HashSet<Integer>(), new HashMap<Integer, Double>(), 0, (sType == SearchType.DFS) ? 0 : people.size(), 0);
         State finalState = null;
         
+        System.out.println("There are " + people.size() + " people total");
+        
         if (sType == SearchType.DFS)
             finalState = DFSSolver.dfs(initialState, people);
         else if (sType == SearchType.AStar)
