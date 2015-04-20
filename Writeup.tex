@@ -8,6 +8,7 @@
 \usepackage{fixltx2e}
 \usepackage{float}
 \usepackage{url}
+\usepackage{slashbox}
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -135,6 +136,43 @@ Once again, it is clear that adjusting the number of crossfold validations has l
 Although no difference between the columns in Table \ref{fig:mlp} is visible, we can see immediately that the Multilayer Perceptron is a good choice for the CactusCard company. In all cases, the success of the classifier was above the criteria set above in Section \ref{testplan}. The MLP algorithm averaged approximately 83\% correctness, which is significantly higher than random chance. This algorithm would be a good choice for future data sets, where it could use the information it learned from this training set to choose who receives a card.
 
 \section{Part 3} \label{part3}
+The third part of the CactusCard project asks us to implement and test two models used to simulate malicious attacks on the card company so that they can better understand how to defend against credit card attacks (fraud, phishing, theft, ect.) 
+
+\subsection{Problem Importance}
+For a credit card company, security is a top priority. When handling such sensitive data a security breach can have massive consequences. It makes sense for CactusCard to want to try it's best to understand how these attacks work and what methods are best to defend against them. Card companies that have a reputation of not being secure can expect to not be in the business for long.
+
+\subsection{Problem Formulation(DAM model)}
+The problem here is a game theory problem where we're asked to analyze the performance of two proposed models for defending against attacks. The game theory models here simulate an attacker and a defender trying to maximize their score by increasing the payoff they receive for either successfully defending or attacking. The attacker and defender both utilize a list of attack vectors that determine the outcome of the game. Both players have to pay a \$100 cost for each attack vector they utilize, but winning the game results in a \$10,000 payoff. For both models their will be 100 possible attack vectors available to the attacker and defender.
+\par
+One of the proposed models is the Deterministic Adversary with Memory(DAM) model. In this model both attacker and defender will pick a single attack vector per turn. In a given turn the defender is considered the winner if it picks the same vector that the attacker picks in that turn, otherwise the attacker wins. Both players will have memory that is used to store the last five attack vectors used by the attacker. We will use M to represent the size of the memory for the attacker and defender, note both attacker and defender memory is independent from each other. For the first M turns the attacker and defender will pick an attack vector from the list of vectors uniformly at random, completely independent from each other. After the initial moves each player will choose a vector either from memory or a vector that is not in memory. The probability that a player will choose its vector from memory is determined by a parameter S. S ranges from 0.0 to 1.0, a player will have a 100\% chance to pick from memory with an S = 1.0.
+
+\subsection{Solution Proposals(DAM model)}
+For the DAM model CactusCard asks us to find a strategy for the defender that performs better than the defender in the DAM model. Given that the number of attack vectors is 100 and the number of vectors stored in memory at any point is 5, it makes sense for the defender to try to maximize the number of times both defender and attacker pick their vector from memory. Even if the attacker is unlikely to pick from memory (low S value), it should be more beneficial to always pick from memory since the chance that both the attacker and defender will pick the same not-in-memory vector is very small (1/95). When both attacker and defender pick from memory, the probability for the defender to successfully defend jumps to (1/5). It seems that the best strategy the defender can use is to always pick a vector from memory. 
+
+\subsection{Test Plan(DAM model)}
+To test the DAM model alternate strategy, the base DAM model defender strategy will be compared to the alternative defender strategy that we proposed. The base DAM model will be implemented using JAVA. Testing the alternate strategy for the defender will be simple, we can just leave the S parameter for the defender as 1.0 so that the defender always picks its vector from memory. Using the implementation a series of test will be ran analyzing the average payoff for each player for the different S parameters. The same will be done for the alternative strategy. The two strategies will be compared after the average payoff for the players is gathered.
+
+\subsection{Solution 1(DAM model)}
+Overall the defender performs very poorly in the base DAM model. In the best case scenario, where both defender and attacker have a 100\% chance to pick their vector from memory the defender still only blocks roughly 20\% of the attacks. We took the average number of attacks successfully defended of 20 simulations and compiled them into the table below:
+
+
+\begin{table}[H]
+{\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{ | p{3.2cm} | l | l | l | l | l |}
+\hline
+\backslashbox{Defense S}{Attack S} 	& 0.0	& 0.25	& 0.5	& 0.75	& 1.0            \\ \hline
+0.0  & 5.4 	& 4.3	& 2.6	& 1.4	& 0.2   \\ \hline
+0.25 & 4.3	& 8.8   & 12.8	& 17.9	& 25.2   \\ \hline
+0.5  & 2.3	& 14.5	& 24.4	& 37.3	& 50.4   \\ \hline
+0.75 & 1.8	& 17.2	& 35.1	& 57.7	& 74.3	\\ \hline
+1.0  & 0.2	& 23.5	& 46.0	& 71.2	& 100.5	\\ \hline
+\end{tabular}} \quad
+\caption{Average number of attacks successfully defended (out of 500) attacks by varying S parameters}
+\end{table}
+
+Since our proposed alternative strategy was for the defender to simply always pick from memory no further testing was needed. This table not only shows the performance of our base model, but also the performance of our proposed alternative strategy for the defender. Although our alternative model no longer requires an S parameter, its performance can be accurately represented by the table when the defenders S parameter equals 1.0.
+\par
+Based on these results, I would not recommend using a defender strategy that follows the DAM model.
 \subsection{Dominant Strategy}
 
 Whenever this game is played, CactusCard cannot make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amount of time possible. The most cost-effective way to make sure the game is not played very long is to make sure the attacker is not making any money, and then minimizing our cost while still ensuring that the attacker is not making money.
