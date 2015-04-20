@@ -1,12 +1,10 @@
 Part 3
 
-Dominant Strategy:
+Whenever this game is played, CactusCard can not make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amount of time possible. The most cost-effective way to make sure the game isn't played very longly is to make sure the attacker isn't making any money, and then minimizing our cost while still ensuring that the attacker isn't making money.
 
-Whenever this game is played, CactusCard can not make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amound of time possible. The most costeffective way to make sure the game isn't played very longly is to make sure the attacker isn't making any money, and then minizing our cost while still ensuring that the attacker isn't making money.
+So the goal is to defend the number of attacks that will maximize his losses and minimize the money we spend. 
 
-So the goal is to defend the number of attacks that will maxamize his losses and minimize the money we spend. 
-
-The first priority is to ensure the attacker is losing money. This is computed through determining the expected value. Once we get him losing money, we need to find the optimal amount of vectors to defend that will miniminze out losses. The following is our findings when the attacker attacks 1, 2, and 10 vectors.
+The first priority is to ensure the attacker is losing money. This is computed through determining the expected value. Once we get him losing money, we need to find the optimal amount of vectors to defend that will minimize out losses. The following is our findings when the attacker attacks 1, 2, and 10 vectors.
 
 assuming:
 attacker = 1
@@ -14,7 +12,16 @@ catk = 1000
 
 cost results: 
 
-Defender=> assuming they only attack one vector, then we're going to average out to about -$10000 anyway we play, no matter what the other variables are. The best resutls I found were defending 97 attacks. That way, the attacker will average out at -$797.98 and the defender will average out at -$9902.02.
+Defender=> assuming they only attack one vector, then we're going to average out to about -$10000 anyway we play, no matter what the other variables are. The best results I found were defending 97 attacks. That way, the attacker will average out at -$797.98 and the defender will average out at -$9902.02.
+
+Payoff (97.98% chance of successful defense): 
+Successful attack:
+Attacker: 9000
+Defender: -19700
+
+Successful defense:
+Attacker: -1000
+Defender: -9700
 
 assuming:
 attacker = 2
@@ -24,14 +31,37 @@ cost results:
 
 Defender=> The attacker's next best move is to attack 2 vectors. This time, the most cost effective way to ensure that he doesn't average out to make any money is to defend 68 vectors. This averages out to the defender losing $41.43 and the attacker losing $41.43 and the defender losing $7758.77
 
+Payoff (90.41% chance of successful defense): 
+Successful attack:
+Attacker: 9000
+Defender: -16800
+
+Successful defense:
+Attacker: -1000
+Defender: -6800
+
+
 assuming:
 attacker = 10
 catk = 300
 
 cost results: 
 
-Defender=> This time the attacker attacks 10 vectors. The best response when the defender is paying $300 per attack is to defend 22 vectors. This still gives a likelyhood of defense at 92.96% and averages out the defender to lose $2192.31 per round the defender to lose $2907.69
+Defender=> This time the attacker attacks 10 vectors. The best response when the defender is paying $300 per attack is to defend 22 vectors. This still gives a likelihood of defense at 92.96% and averages out the defender to lose $2192.31 per round the defender to lose $2907.69
 
-Overall, the reasonable investment for the company entirely depends on the amount of attack vectors that the attacker decides to play. The fewer he plays, the more expensisve it is for the company.
 
+Payoff (92.96% chance of successful defense): 
+Successful attack:
+Attacker: 7000
+Defender: -12200
+
+Successful defense:
+Attacker: -3000
+Defender: -2200
+
+One of the most equal options is when the attacker’s cost is $500, and attacks 10 vectors. If we defend 15 vectors, this has an 82.28% chance of a successful defense.
+
+This will average out to an expected value of -$3227.76 for the attacker and -$3272.24 for the defender.
+
+Overall, the reasonable investment for the company entirely depends on the amount of attack vectors that the attacker decides to play. The fewer he plays, the more expensive it is for the company.
 
