@@ -149,20 +149,20 @@ In summary, both the vector-based classifier and the neural network succeeded at
 The third part of the CactusCard project asks us to implement and test two models used to simulate malicious attacks on the card company so that they can better understand how to defend against credit card attacks (fraud, phishing, theft, etc.).
 
 \subsection{Problem Importance}
-For a credit card company, security is a top priority. When handling such sensitive data a security breach can have massive consequences. It makes sense for CactusCard to want to try it's best to understand how these attacks work and what methods are best to defend against them. Card companies that have a reputation of not being secure can expect to not be in the business for long.
+For a credit card company, security is a top priority. When handling such sensitive data, a security breach can have massive consequences. It makes sense for CactusCard to want to try its best to understand how these attacks work and what methods are best to defend against them. Card companies that have a reputation of not being secure are unlikely to succeed in the business for long. To guarantee the long-term success of CactusCard Credit, robust defense strategies must be developed. 
 
-\subsection{Problem Formulation(DAM model)}
-The problem here is a game theory problem where we're asked to analyze the performance of two proposed models for defending against attacks. The game theory models here simulate an attacker and a defender trying to maximize their score by increasing the payoff they receive for either successfully defending or attacking. The attacker and defender both utilize a list of attack vectors that determine the outcome of the game. Both players have to pay a \$100 cost for each attack vector they utilize, but winning the game results in a \$10,000 payoff. For both models their will be 100 possible attack vectors available to the attacker and defender.
+\subsection{Problem Formulation (DAM model)}
+The problem here is a game theory problem wherein an analysis must be performed on the performance of two proposed models for defending against attacks. The game theory models here simulate an attacker and a defender trying to maximize their score by increasing the payoff they receive for either successfully defending or attacking. The attacker and defender both utilize a list of attack vectors that determine the outcome of the game. Both players have to pay a \$100 cost for each attack vector they utilize, but winning the game results in a \$10,000 payoff. For both models their will be 100 possible attack vectors available to the attacker and defender.
 \par
-One of the proposed models is the Deterministic Adversary with Memory(DAM) model. In this model both attacker and defender will pick a single attack vector per turn. In a given turn the defender is considered the winner if it picks the same vector that the attacker picks in that turn, otherwise the attacker wins. Both players will have memory that is used to store the last five attack vectors used by the attacker. We will use M to represent the size of the memory for the attacker and defender, note both attacker and defender memory is independent from each other. For the first M turns the attacker and defender will pick an attack vector from the list of vectors uniformly at random, completely independent from each other. After the initial moves each player will choose a vector either from memory or a vector that is not in memory. The probability that a player will choose its vector from memory is determined by a parameter S. S ranges from 0.0 to 1.0, a player will have a 100\% chance to pick from memory with an S = 1.0.
+One of the proposed models is the Deterministic Adversary with Memory(DAM) model. In this model, both attacker and defender will pick a single attack vector per turn. In a given turn, the defender is considered the winner if it picks the same vector that the attacker picks in that turn, otherwise the attacker wins. Both players will have memory that is used to store the last five attack vectors used by the attacker. We will use M to represent the size of the memory for the attacker and defender. Note that both attacker and defender memory is independent from each other. For the first M turns the attacker and defender will pick an attack vector from the list of vectors uniformly at random, each completely independent of its opponent. After the initial moves each player will choose a vector either from memory or a vector that is not in memory. The probability that a player will choose its vector from memory is determined by a parameter S. S ranges from 0.0 to 1.0, a player will have a 100\% chance to pick from memory with an S = 1.0.
 
-\subsection{Solution Proposals(DAM model)}
-For the DAM model CactusCard asks us to find a strategy for the defender that performs better than the defender in the DAM model. Given that the number of attack vectors is 100 and the number of vectors stored in memory at any point is 5, it makes sense for the defender to try to maximize the number of times both defender and attacker pick their vector from memory. Even if the attacker is unlikely to pick from memory (low S value), it should be more beneficial to always pick from memory since the chance that both the attacker and defender will pick the same not-in-memory vector is very small (1/95). When both attacker and defender pick from memory, the probability for the defender to successfully defend jumps to (1/5). It seems that the best strategy the defender can use is to always pick a vector from memory. 
+\subsection{Solution Proposals (DAM model)}
+For the DAM model CactusCard asks us to find a strategy for the defender that performs better than the attacker in the DAM model. Given that the number of attack vectors is 100 and the number of vectors stored in memory at any point is 5, it makes sense for the defender to try to maximize the number of times both defender and attacker pick their vector from memory. Even if the attacker is unlikely to pick from memory (low S value), it should be more beneficial to always pick from memory since the chance that both the attacker and defender will pick the same not-in-memory vector is very small (1/95). When both attacker and defender pick from memory, the probability for the defender to successfully defend jumps to (1/5). It seems that the best strategy the defender can use is to always pick a vector from memory. 
 
-\subsection{Test Plan(DAM model)}
-To test the DAM model alternate strategy, the base DAM model defender strategy will be compared to the alternative defender strategy that we proposed. The base DAM model will be implemented using JAVA. Testing the alternate strategy for the defender will be simple, we can just leave the S parameter for the defender as 1.0 so that the defender always picks its vector from memory. Using the implementation a series of test will be ran analyzing the average payoff for each player for the different S parameters. The same will be done for the alternative strategy. The two strategies will be compared after the average payoff for the players is gathered.
+\subsection{Test Plan (DAM model)}
+To test the DAM model alternate strategy, the base DAM model defender strategy will be compared to the alternative defender strategy that we proposed. The base DAM model will be implemented using Java. Testing the alternate strategy for the defender will be simple, we can just leave the S parameter for the defender as 1.0 so that the defender always picks its vector from memory. Using the implementation a series of test will be ran analyzing the average payoff for each player for the different S parameters. The same will be done for the alternative strategy. The two strategies will be compared after the average payoff for the players is gathered.
 
-\subsection{Solution 1(DAM model)}
+\subsection{Solution 1 (DAM model)}
 Overall the defender performs very poorly in the base DAM model. In the best case scenario, where both defender and attacker have a 100\% chance to pick their vector from memory the defender still only blocks roughly 20\% of the attacks. We took the average number of attacks successfully defended of 20 simulations and compiled them into the table below:
 
 
@@ -182,14 +182,12 @@ Overall the defender performs very poorly in the base DAM model. In the best cas
 
 Since our proposed alternative strategy was for the defender to simply always pick from memory no further testing was needed. This table not only shows the performance of our base model, but also the performance of our proposed alternative strategy for the defender. Although our alternative model no longer requires an S parameter, its performance can be accurately represented by the table when the defenders S parameter equals 1.0.
 \par
-Based on these results, I would not recommend using a defender strategy that follows the DAM model.
-\subsection{Dominant Strategy}
+Based on these results, the team does not recommend using a defender strategy that follows the DAM model. Choosing this strategy is likely to lead to CactusCard Credit failing to block the majority of the attacks, which will negatively affect our client base.
 
-Whenever this game is played, CactusCard cannot make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amount of time possible. The most cost-effective way to make sure the game is not played very long is to make sure the attacker is not making any money, and then minimizing our cost while still ensuring that the attacker is not making money.
+\subsection{Dominant Strategy}
+Whenever this game is played, CactusCard cannot make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amount of time possible. The most cost-effective way to make sure the game is not played very long is to make sure the attacker is not making any money, and then minimizing our cost while still ensuring that the attacker is not making money. As a result, the goal is to defend the number of attacks that will maximize his losses and minimize the money spent. 
 \par
-So the goal is to defend the number of attacks that will maximize his losses and minimize the money we spend. 
-\par
-The first priority is to ensure the attacker is losing money. This is computed through determining the expected value. Once we get him losing money, we need to find the optimal amount of vectors to defend that will minimize out losses. The following is our findings when the attacker attacks 1, 2, and 10 vectors.
+The first priority is to ensure the attacker is losing money. This is computed through determining the expected value. Once we verify that the attacking party is losing money, we need to find the optimal amount of vectors to defend that will minimize our losses. Below is an analysis of our findings when the attacker attacks 1, 2, and 10 vectors.
 \par
 Assuming:
 attacker = 1,
@@ -197,7 +195,7 @@ catk = 1000
 \par
 Cost Results: 
 
-Defender $\Rightarrow$ Assuming they only attack one vector, then we're going to average out to about -\$10000 anyway we play, no matter what the other variables are. The best results I found were defending 97 attacks. That way, the attacker will average out at -\$797.98 and the defender will average out at -\$9902.02.
+Defender $\Rightarrow$ Assuming they only attack one vector, then the result is going to average out to about -\$10000 regardless of play style and the other variables. The best results found were defending 97 attacks. That way, the attacker will average out at -\$797.98 and the defender will average out at -\$9902.02.
 \par
 Assuming:
 attacker = 2,
@@ -205,7 +203,7 @@ catk = 500
 \par
 Cost Results: 
 
-Defender $\Rightarrow$ The attacker's next best move is to attack 2 vectors. This time, the most cost effective way to ensure that he doesn't average out to make any money is to defend 68 vectors. This averages out to the defender losing \$41.43 and the attacker losing \$41.43 and the defender losing \$7758.77
+Defender $\Rightarrow$ The attacker's next best move is to attack 2 vectors. This time, the most cost effective way to ensure that s/he does not average out to gain any money is to defend 68 vectors. This averages out to the defender losing \$41.43 and the attacker losing \$41.43 and the defender losing \$7758.77
 \par
 Assuming:
 attacker = 10,
@@ -214,8 +212,10 @@ catk = 300
 Cost Results: 
 
 Defender $\Rightarrow$ This time the attacker attacks 10 vectors. The best response when the defender is paying \$300 per attack is to defend 22 vectors. This still gives a likelihood of defense at 92.96\% and averages out the defender to lose \$2192.31 per round the defender to lose \$2907.69
-\par
-Overall, the reasonable investment for the company entirely depends on the amount of attack vectors that the attacker decides to play. The fewer he plays, the more expensive it is for the company.
+
+\subsection{Conclusion}
+Overall, the reasonable investment for the company entirely depends on the amount of attack vectors that the attacker decides to play. The fewer he plays, the more expensive it is for the company. CactusCard Credit must prioritize its defense resources based on the apparent attack ability of the opponent. Opponents who attack fewer vectors may in reality require a more significant defense effort.
+
 
 
 
