@@ -7,7 +7,7 @@
 \usepackage[tight,footnotesize]{subfigure}
 \usepackage{fixltx2e}
 \usepackage{float}
-\usepackage{url}
+\usepackage{hyperref}
 \usepackage{slashbox}
 \usepackage[english]{babel}
 
@@ -36,11 +36,12 @@ These tasks will be undertaken by a team of computer science students with knowl
 \par
 First, the team needed to market the card effectively. Using 10 cards with no sign up fee and 0\% interest for one year, CactusCard Credit strategically generated interest in the product. Using search techniques described below in Section \ref{part1}, the team devised both simple and complex algorithms which find the optimum individuals to receive these free cards in order to maximize the number of their friends who sign up for the product. The team found that TODO FILL THIS IN was the best algorithm for this, as it BLAH BLAH DETAILS.
 \par
-After devising a successful marketing strategy, the team turned its focus to the determination of credit worthiness. As seen below in Section \ref{part2}, the team used a well-known machine learning library called Weka to run various machine learning algorithms on the data set provided. This data set, which contained 15 anonymized credit attributes plus whether or not that individual was given a card, was used to train learning machines which were then evaluated on their ability to accurately predict the issuance decision. The team found that a machine running the Multilayer Perceptron algorithm was the most successful at predicting credit decisions and would serve the company well in the future.
+After devising a successful marketing strategy, the team turned its focus to the determination of credit worthiness. As seen below in Section \ref{part2}, the team used a well-known machine learning library called Weka to run various machine learning algorithms on the data set provided. This data set, which contained 15 anonymized credit attributes plus whether or not that individual was given a card, was used to train learning machines which were then evaluated on their ability to accurately predict the issuance decision. After running several tests, the team concluded that a Support Vector Machine run using Weka's implementation of the Sequential Minimal Optimization algorithm was the most effective, both in terms of percentage of individuals correctly classified and in terms of runtime. This SVM algorithm will be an effective choice for CactusCard Credit in the future, and the team has confidence in the correctness of Weka's implementation.
 \par
-This isn’t your typical game in that both adversary’s have a shot at a positive outcome. In this game, the only option for the defender is minimize his losses. Knowing this, the defender’s goal in this game should to try to spend the least amount of money while attempting to make the game end as quickly as possible. We determined that the way to do this is to ensure that the attacker never makes any money over a repeated game, but we don’t waste money defending extra vectors. This logic dominates our thinking for the MUCM model. We were successful at employing this model at a couple of different assumptions which is detailed in the report.
+Finally, the team evaluated strategies to defend the company against malicious and fraudulent attacks. The team concluded that, unlike a typical game-theory situation, both players do not have the something to gain. The best case scenario for the defender is simply to minimize losses. Knowing this, the team determined that the defender’s goal in this game should to try to spend the least amount of money while attempting to make the game end as quickly as possible. The best way to do this is to ensure that the attacker never makes any money over a repeated game, but we don’t waste money defending extra vectors. This logic dominates our thinking for the MUCM model. We were successful at employing this model in several different scenarios which are detailed in Section \ref{part3}.
 \par
-Paragraph about the DAM Model\end{abstract}
+Paragraph about the DAM Model
+\end{abstract}
 \newpage
 
 \IEEEpeerreviewmaketitle
@@ -229,7 +230,8 @@ Discuss issues with part 2 dataset -- all attributes weighted equally
 % use section* for acknowledgement
 \section*{Appendices}
 
-Source code and stuff goes here
+The source code for this assignment can be found at:
+\url{https://github.com/dhganey/471-project}
 
 
 \section*{Work}
