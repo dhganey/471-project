@@ -49,10 +49,13 @@ The first part of the project requires the development of search programs to opt
 \subsection{Problem Importance}
 For a new product such as the CactusCard Plus, the initial marketing wave may determine whether the product success or fails. This importance of this period, as the product begins to build a user base, cannot be overstated. Even more critical is the fact that the marketing department wishes to give out some of the cards for free. It is critical that the team choose the right users to receive these free cards such that the impact of those cards in their friend network is the largest.
 
+\subsection{Problem Formulation}
+The goal of the problem is to find the optimal distribution of cards such that the most individuals adopt the card. This means that in traversing the relationships established in the input file, the program should find points to deliver free cards where the cards have the desired effect (increasing exposure to the card) without having an undesired side effect (namely, giving too many free cards to a small group and failing to expose other clusters entirely). By using a na{\"i}ve solution combined with a heuristic-based solution, the team can guarantee it will provide an optimal answer.
+
 \subsection{Solution Proposals}
 The social network information given by the marketing department takes the form of a graph of friends. Each row of the dataset indicates a bidirectional relationship between two individuals. The goal is to give out one free card per day for 10 days. After giving a card, we can track the friends of the individual who received the card (``exposed" individuals) and determine the probability that they sign up for CactusCard Plus. Strategically distributing these cards in the friend network will maximize the number of sign ups, while never putting the company in a position where it has to give a free card to a friend of an individual who already received a free card (as that is unlikely to net new sign ups).
 \par
-Two solutions are proposed. The first solution to this search problem uses a simple depth-first search. TODO -- expand more on this here.
+Two solutions are proposed. The first solution to this search problem uses a simple depth-first search. 
 
 \subsection{Test Plan}
 TODO
@@ -62,6 +65,8 @@ TODO
 
 \subsection{Solution 2}
 TODO
+
+TODO PROVE HEURISTIC ADMISSIBILITY
 
 \section{Part 2} \label{part2}
 Part 2 of the project describes another task given by the CEO of the CactusCard Credit Company, wherein a program should be developed to provide ``a \emph{machine learning based approach} to identify individuals who should/should not be given the CactusCardPlus.'' This section will formulate this problem and describe the steps taken to solve it.
@@ -139,7 +144,7 @@ Although no difference between the columns in Table \ref{fig:mlp} is visible, we
 In summary, both the vector-based classifier and the neural network succeeded at predicting the credit issuance decision with at least 80\% accuracy. Both algorithms are therefore suitable for the company and can be used to make decisions regarding new clients. However, the SVM performs significantly better, as the time taken to build the model is a fraction of the time taken by the multilayer perceptron. As a result, the team recommends the sequential minimal optimization implementation of the support vector machine for CactusCard Credit.
 
 \section{Part 3} \label{part3}
-The third part of the CactusCard project asks us to implement and test two models used to simulate malicious attacks on the card company so that they can better understand how to defend against credit card attacks (fraud, phishing, theft, ect.) 
+The third part of the CactusCard project asks us to implement and test two models used to simulate malicious attacks on the card company so that they can better understand how to defend against credit card attacks (fraud, phishing, theft, etc.).
 
 \subsection{Problem Importance}
 For a credit card company, security is a top priority. When handling such sensitive data a security breach can have massive consequences. It makes sense for CactusCard to want to try it's best to understand how these attacks work and what methods are best to defend against them. Card companies that have a reputation of not being secure can expect to not be in the business for long.
@@ -218,14 +223,15 @@ Discuss issues with part 2 dataset -- all attributes weighted equally
 
 
 
-% conference papers do not normally have an appendix
-
 
 % use section* for acknowledgement
 \section*{Appendices}
 
 Source code and stuff goes here
 
+
+\section*{Work}
+We're supposed to document the work done by each team member here.
 
 \begin{thebibliography}{1}
 
