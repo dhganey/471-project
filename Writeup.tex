@@ -96,21 +96,21 @@ The team will evaluate several popular machine learning algorithms in the Weka E
 \subsection{Solution 1}
 Support Vector Machines (SVM) are, according to Russell and Norvig, ``the most popular approach for `off-she-shelf' supervised learning''' \cite{ai}. SVMs do a good job of classification because they separate groups as much as possible (called a ``maximum margin separator''). Additionally, SVMs can work in multiple dimensions (creating a ``hyperplane'') which will be important with the high number of credit attributes in the data set. Finally, SVMs are considered a non-parametric method, because they store some of the training examples, and yet like parametric models, they often avoid over-fitting the data \cite{ai}.
 \par
-To use an SVM on the data set provided by the CEO, Weka supports the addition of a library called libsvm. This Java library contains an implementation of the SVM algorithm which hooks into the Weka Explorer interface. The team will set the Explorer to use varying numbers of crossfold validation passes, in order to evaluate the classifier. This will split the dataset, train the SVM with a subset of the dataset, and then evaluate the SVM's effectiveness at predicting the card issuance decision by comparing the SVM's predictions to the actual data. The results from running the libsvm algorithm on the dataset are shown in the table below:
+To use an SVM on the data set provided by the CEO, Weka supports the addition of a library called libsvm. This Java library contains an implementation of the SVM algorithm (called SMO, for sequential minimal optimization) which hooks into the Weka Explorer interface. The team will set the Explorer to use varying numbers of crossfold validation passes, in order to evaluate the classifier. This will split the dataset, train the SVM with a subset of the dataset, and then evaluate the SVM's effectiveness at predicting the card issuance decision by comparing the SVM's predictions to the actual data. The results from running the libsvm algorithm on the dataset are shown in the table below:
 
 \begin{table}[H]
 {\renewcommand{\arraystretch}{1.2}%
 \begin{tabular}{ | p{2.5cm} | l | l | l | }
 \hline
 Crossfold validations         & 5             & 10            & 15            \\ \hline
-Time taken to build model (s) & .19           & .24           & .19           \\ \hline
-Correctly classified (\%)     & 382 (55.36\%) & 385 (55.80\%) & 384 (55.65\%) \\ \hline
-Incorrectly classified (\%)   & 308 (44.64\%) & 305 (44.20\%) & 306 (44.35\%) \\ \hline
+Time taken to build model (s) & .15           & .21           & .16           \\ \hline
+Correctly classified (\%)     & 587 (85.07\%) & 586 (84.93\%) & 585 (84.78\%) \\ \hline
+Incorrectly classified (\%)   & 103 (14.93\%) & 104 (15.07\%) & 105 (15.22\%) \\ \hline
 \end{tabular}} \quad
 \caption{A table showing the results of the libsvm applied to the data set}
 \end{table}
 
-As we can see from the table, no significant difference exists when adjusting the number of crossfold validation passes. All of the attempts fall well within the expected runtime, and predict with approximately 55\% accuracy whether someone was or was not given a CactusCard. While this is consistently better than randomly guessing, it only exceeds that percentage by approximately 5\%. While SVMs are good classifiers, in this instance this algorithm is not a suitable choice for the company, as it fails the 80\% criteria established in Section \ref{testplan}.
+As we can see from the table, no significant difference appears to exist when adjusting the number of crossfold validation passes. All of the attempts fall well within the expected runtime, and predict with approximately 84\% accuracy whether someone was or was not given a CactusCard. This is well within the criteria established above in Section \ref{testplan}, and thus is a valid contender for the chosen algorithm.
 
 \subsection{Solution 2}
 Another type of machine learning algorithm is called a Multilayer Perceptron (MLP). This is a type of neural network, which maps from inputs (in this case, the credit attributes) to outputs (whether someone was given a card). The MLP is suitable for this task because it uses \emph{backpropagation}, which is a supervised learning technique. The network is initialized with random initial weights, then backpropagation algorithm minimizes the error function using the method of gradient descent, which in turn recursively updates the initial weights. By using backpropagation, MLPs are able to handle hidden values which are present in this dataset. Given that MLPs handle such hidden values whereas SVMs do not, we intuitively expect that MLPs will better classify the data.
@@ -134,6 +134,9 @@ Incorrectly classified (\%)   & 106 (15.36\%) & 118 (17.10\%) &           118 (1
 Once again, it is clear that adjusting the number of crossfold validations has little to no effect on the accuracy of the classifier. As a result, the recommendation of the team is to use 5 validations on data sets of this size, so the algorithm does not take too long to run. While the time taken to build the data model was always nearly the same, the total runtime for all passes of the validation increased dramatically with larger numbers of cross fold validations. Since they appear to have no impact on the effectiveness of the algorithm, there is no need for the program to take that additional time. It is likely that on future datasets with larger numbers of individuals, the runtime would increase further still, reinforcing the decision that 5 crossfold validations is the correct choice.
 \par
 Although no difference between the columns in Table \ref{fig:mlp} is visible, we can see immediately that the Multilayer Perceptron is a good choice for the CactusCard company. In all cases, the success of the classifier was above the criteria set above in Section \ref{testplan}. The MLP algorithm averaged approximately 83\% correctness, which is significantly higher than random chance. This algorithm would be a good choice for future data sets, where it could use the information it learned from this training set to choose who receives a card.
+
+\subsection{Conclusion}
+In summary, both the vector-based classifier and the neural network succeeded at predicting the credit issuance decision with at least 80\% accuracy. Both algorithms are therefore suitable for the company and can be used to make decisions regarding new clients. However, the SVM performs significantly better, as the time taken to build the model is a fraction of the time taken by the multilayer perceptron. As a result, the team recommends the sequential minimal optimization implementation of the support vector machine for CactusCard Credit.
 
 \section{Part 3} \label{part3}
 The third part of the CactusCard project asks us to implement and test two models used to simulate malicious attacks on the card company so that they can better understand how to defend against credit card attacks (fraud, phishing, theft, ect.) 
