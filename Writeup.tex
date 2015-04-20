@@ -35,7 +35,7 @@ These tasks will be undertaken by a team of computer science students with knowl
 \par
 First, the team needed to market the card effectively. Using 10 cards with no sign up fee and 0\% interest for one year, CactusCard Credit strategically generated interest in the product. Using search techniques described below in Section \ref{part1}, the team devised both simple and complex algorithms which find the optimum individuals to receive these free cards in order to maximize the number of their friends who sign up for the product. The team found that TODO FILL THIS IN was the best algorithm for this, as it BLAH BLAH DETAILS.
 \par
-After devising a successful marketing strategy, the team turned its focus to the determination of credit worthiness. As seen below in Section \ref{part2}, the team used a well-known machine learning library called Weka to run various machine learning algorithms on the data set provided. This data set, which contained 15 anonymized credit attributes plus whether or not that individual was given a card, was used to train learning machines which were then evaluated on their ability to accurately predict the issuance decision. The team found that a machine running the Multilayer Perceptron algorithm was the most successful at predicting credit decisions and would serve the company well in the future.
+After devising a successful marketing strategy, the team turned its focus to the determination of credit worthiness. As seen below in Section \ref{part2}, the team used a well-known machine learning library called Weka to run various machine learning algorithms on the data set provided. This data set, which contained 15 anonymized credit attributes plus whether or not that individual was given a card, was used to train learning machines which were then evaluated on their ability to accurately predict the issuance decision. The team found that a machine running the Support Vector Machine algorithm was the most successful at predicting credit decisions and would serve the company well in the future.
 \par
 Paragraph(s) about the game theory part
 \end{abstract}
@@ -181,6 +181,8 @@ Overall the defender performs very poorly in the base DAM model. In the best cas
 Since our proposed alternative strategy was for the defender to simply always pick from memory no further testing was needed. This table not only shows the performance of our base model, but also the performance of our proposed alternative strategy for the defender. Although our alternative model no longer requires an S parameter, its performance can be accurately represented by the table when the defenders S parameter equals 1.0.
 \par
 Based on these results, I would not recommend using a defender strategy that follows the DAM model.
+
+% Is this for the MUCM model?
 \subsection{Dominant Strategy}
 
 Whenever this game is played, CactusCard cannot make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amount of time possible. The most cost-effective way to make sure the game is not played very long is to make sure the attacker is not making any money, and then minimizing our cost while still ensuring that the attacker is not making money.
