@@ -9,7 +9,7 @@ import java.util.HashSet;
 public class Final_Project_Part_1 {
 
     public static void main(String[] args) {
-        SearchType sType = SearchType.AStar;
+        SearchType sType = SearchType.DFS;
         
         HashMap<Integer, HashSet<Integer>> people = new HashMap<>();
         String[] pair = new String[2];
@@ -56,7 +56,7 @@ public class Final_Project_Part_1 {
         
         
         // create the initial state
-        State initialState = new State(new HashSet<Integer>(), new HashMap<Integer, Double>(), 0, (sType == SearchType.DFS) ? 0 : people.size(), 0);
+        State initialState = new State(new HashMap<Integer, Integer>(), new HashMap<Integer, Double>(), 0, (sType == SearchType.DFS) ? 0 : people.size(), 0);
         State finalState = null;
         
         System.out.println("There are " + people.size() + " people total");
@@ -68,8 +68,8 @@ public class Final_Project_Part_1 {
         
         
         System.out.println("Result:");
-        for (int person : finalState.getGivenCard()) {
-            System.out.println(person);
+        for (int person : finalState.getGivenCard().keySet()) {
+            System.out.println(person + " was given card " + finalState.getGivenCard().get(person));
         }
         System.out.println("Total reward = " + finalState.getReward());
     }
@@ -82,13 +82,17 @@ public class Final_Project_Part_1 {
         return sum;
     }
     
-    public static double calcAStarReward(HashMap<Integer, Double> exposedToCard, int notExposed) {
+    public static double calcAStarReward(HashMap<Integer, Double> exposedToCard, int notExposed, int depth) {
+//        System.out.println("In function call " + exposedToCard.size());
+        if (depth == 10) {
+            notExposed = 0;
+        }
         return calcDFSReward(exposedToCard) + notExposed;
     }
     
     public static double calcPAdoption(int numGivenCard, int numExposedToCard) {
         if (numExposedToCard == 0 && numGivenCard == 0)
             return 0.1;
-        return Math.max(0.1, 1-1/(numExposedToCard + numGivenCard));
+        return Math.max(0.1, (1.0-1.0/(numExposedToCard + numGivenCard)));
     }
 }
