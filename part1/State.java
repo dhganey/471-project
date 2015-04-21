@@ -10,6 +10,7 @@ public class State {
     private double reward;
     private double heuristicReward;
     public State parent;
+    public int person;
     
     public State(HashSet<Integer> givenCard, HashMap<Integer, Double> exposedToCard, double reward, double heuristicReward, int depth) {
         this.givenCard = givenCard;
@@ -18,6 +19,7 @@ public class State {
         this.heuristicReward = heuristicReward;
         this.depth = depth;
         parent = null;
+        person = -1;
     }
     
     public void addPerson(int person) {

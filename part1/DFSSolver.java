@@ -15,6 +15,7 @@ public class DFSSolver {
         while (!frontier.isEmpty()) {           
             State current = frontier.pop();
             System.out.println("Started next iteration with depth " + current.getDepth());
+            System.out.println("Looking at person " + current.person);
             if (current.isGoal()) {
 //                System.out.println("Just found goal");
 //                for (int guy : people.keySet()) {
@@ -40,7 +41,7 @@ public class DFSSolver {
             HashMap<Integer, Double> exposedToCard = current.getExposedToCard();
             for (Integer person : people.keySet()) {
                 if (!givenCard.contains(person) && !exposedToCard.containsKey(person)) {
-                    System.out.println("Found person: " + person);
+//                    System.out.println("Found person: " + person);
                     HashSet<Integer> newGivenCard = new HashSet<>();
                     newGivenCard = (HashSet)givenCard.clone();
                     HashMap<Integer, Double> newExposedToCard = new HashMap<>();
@@ -57,11 +58,12 @@ public class DFSSolver {
                     double reward = Final_Project_Part_1.calcDFSReward(newExposedToCard);
                     State newState = new State(newGivenCard, newExposedToCard, reward, 0, current.getDepth()+1);
                     newState.parent = current;
-                    System.out.println("Added state to frontier: ");
-                    for (int guy : newState.getGivenCard()) {
-                        System.out.println(guy);
-                    }
-                    System.out.println("Reward = " + newState.getReward());
+//                    System.out.println("Added state to frontier: ");
+//                    for (int guy : newState.getGivenCard()) {
+//                        System.out.println(guy);
+//                    }
+//                    System.out.println("Reward = " + newState.getReward());
+                    newState.person = person;
                     frontier.push(newState);
                 }
             }
