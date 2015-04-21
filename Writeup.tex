@@ -307,7 +307,7 @@ Overall, the reasonable investment for the company entirely depends on the amoun
 A new implementation, combining aspects of the MUCM and DAM consists of setting up the model similar to the DAM. Instead of a static cost per attack vector, use parameters for cost $C_{atk}{*}$ and $C_{def}{*}$ for the attacker and CactusCard, respectively.
 \par
 A second change is to select $X_{atk}$ vectors, where $X_{atk} \leq M_{atk}$ and chosen randomly. The probability of selecting one of the previous $M_{atk}$ moves is then given by
-\[S_{atk} - \prod_{i=0}^{X_{atk}} \frac{X_{atk}-i}{M_{atk}}\]
+\[S_{atk} - \prod_{i=0}^{X_{atk}-1} \frac{M_{atk}-(i+1)}{M_{atk}-i}\]
 The probability of picking a move not in memory is still $1-S_{atk}$ (uniformly at random). The defense is the same as the attack, but replacing $S_{atk}$, $X_{atk}$, $M_{atk}$ with $S_{def}$, $X_{def}$, $M_{def}$
 \par
 This model is no longer limited in the same way as the DAM because it no longer selects only one attack vector in each round $N$. Instead, it selects a random number of attack vectors from vectors in its memory and from vectors not in its memory. This is a more complex model that better encapsulates the idea that attackers are not restricted to only one attack vector. It still relies on memory $M_{atk}$ and $M_{def}$, and it gives greater freedom to choose parameters $C_{atk}*$ and $C_{def}*$ which can better represent actual costs, rather than using a static value.
@@ -320,7 +320,7 @@ Unsuccessful attacks have payoffs \[U.P_{atk} = -\sum_{v \in V_{atk}} C_{atk}*\]
 \par
 The payoff matrix for this new model for a successful attack or successful defense relies on whether $V_{atk} \cap V_{def} = \emptyset$ for Case 1, or $V_{atk} \cap V_{def} \neq \emptyset$ for Case 2. Using the definition of independence of sets in a probability space $P(A \cap B) = P(A)\cdot P(B)$
 \[P( V_{atk} \cap V_{def}) =\]
-\[ V^2 ( 1 - \prod_{i=0}^{X_{atk}} \frac{X_{atk}-i}{M_{atk}}) ( 1 - \prod_{j=0}^{X_{def}} \frac{X_{def}-j}{M_{def}}) \]
+\[ V^2 ( 1 - \prod_{i=0}^{X_{atk}-1} \frac{M_{atk}-(i+1)}{M_{atk}-i}) ( 1 - \prod_{j=0}^{X_{def}-1} \frac{M_{def}-(j+1)}{M_{def}-j}) \]
 
 Combining these probabilities and the payoffs gives the payoff matrix for this new model.
  \begin{table}[H]
