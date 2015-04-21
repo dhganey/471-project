@@ -30,20 +30,22 @@ CSE 471\\}
 
 \renewcommand{\abstractname}{Executive Summary}
 \begin{abstract}
-The CEO of CactusCard has commissioned a team to solve several problems facing the up-and-coming financial company. The company is in the process of releasing a new card, called the CactusCardPlus. In order for this new product to be a success, the CEO recognizes that CactusCard Credit must accomplish three distinct goals. First, the company needs to successfully market the new card, through both traditional strategies and in particular to users of social media. In addition to a powerful marketing campaign, the company must ensure it makes good decisions about which applicants are deserving of a line of credit. Failing to do this would put the company at a disadvantage, relative to the numerous credit agencies who do use data to make credit decisions. Finally, the success of the product hinges on its ability to protect users (and the company) from credit card fraud. As such, the team must be prepared to counter fraudulent users through a variety of strategies.
+The CEO of CactusCard has commissioned a team to solve several problems facing the up-and-coming financial company. The company is in the process of releasing a new card, called the CactusCardPlus. In order for this new product to be a success, the CEO recognizes that CactusCard Credit must accomplish three distinct goals. First, the company needs to successfully market the new card, through both traditional strategies and in particular to users of social media. In addition to a powerful marketing campaign, the company must ensure it makes good decisions about which applicants are deserving of a line of credit. Failing to do this would put the company at a disadvantage relative to other credit agencies. Finally, the success of the product hinges on its ability to protect users (and the company) from credit card fraud. As such, the team must be prepared to counter fraudulent users through a variety of strategies.
 \par
 These tasks were undertaken by a team of computer science students with knowledge of artificial intelligence. Using search algorithms, the team maximized the marketing potential of the card. Using machine learning techniques, the team utilized data to accurately predict which applicants will best utilize their line of credit. Using game theory, the team developed successful counter-fraud strategies which can be used to protect the company. 
 \par
-First, the team needed to market the card effectively. Using 10 cards with no sign up fee and 0\% interest for one year, CactusCard Credit strategically generated interest in the product. Using search techniques described below in Section \ref{part1}, the team devised both simple and complex algorithms which find the optimum individuals to receive these free cards in order to maximize the number of their friends who sign up for the product. The team found that TODO FILL THIS IN was the best algorithm for this, as it BLAH BLAH DETAILS.
+First, the team needed to market the card effectively. Using 10 cards with no sign up fee and 0\% interest for one year, CactusCard Credit strategically generated interest in the product. Using search techniques described below in Section \ref{part1}, the team devised both simple and complex algorithms which find the optimum individuals to receive these free cards in order to maximize the number of their friends who sign up for the product. The team developed a depth-first search solution as well as a heuristic (A*) search solution. Memory restrictions meant that the A* search did not run efficiently and thus presents a conundrum. With more available computational resources, A* would more efficiently find an optimal solution, but given the resources available, DFS will find a workable solution in less time.
 \par
-After devising a successful marketing strategy, the team turned its focus to the determination of credit worthiness. As seen below in Section \ref{part2}, the team used a well-known machine learning library called Weka to run various machine learning algorithms on the data set provided. This data set, which contained 15 anonymized credit attributes plus whether or not that individual was given a card, was used to train learning machines which were then evaluated on their ability to accurately predict the issuance decision. After running several tests, the team concluded that a Support Vector Machine run using Weka's implementation of the Sequential Minimal Optimization algorithm was the most effective, both in terms of percentage of individuals correctly classified and in terms of runtime. This SVM algorithm will be an effective choice for CactusCard Credit in the future, and the team has confidence in the correctness of Weka's implementation.
+After devising a successful marketing strategy, the team turned its focus to the determination of credit worthiness. As seen below in Section \ref{part2}, the team used a well-known machine learning library called Weka to run various machine learning algorithms on the data set provided. This data set, which contained 15 anonymized credit attributes plus whether or not that individual was given a card, was used to train learning machines which were then evaluated on their ability to accurately predict the issuance decision. The team concluded that a Support Vector Machine run using Weka's implementation of the Sequential Minimal Optimization algorithm was the most effective, both in terms of percentage of individuals correctly classified and in terms of runtime. This SVM algorithm will be an effective choice for CactusCard Credit in the future, and the team has confidence in the correctness of Weka's implementation.
 
 \par
-Finally, the team evaluated strategies to defend the company against malicious and fraudulent attacks. The team concluded that, unlike a typical game-theory situation, both players do not have the something to gain. The best case scenario for the defender is simply to minimize losses. Knowing this, the team determined that the defender’s goal in this game should to try to spend the least amount of money while attempting to make the game end as quickly as possible. The best way to do this is to ensure that the attacker never makes any money over a repeated game, but we don’t waste money defending extra vectors. This logic dominates our thinking for the MUCM model. We were successful at employing this model in several different scenarios which are detailed in Section \ref{part3}.
+Finally, the team evaluated strategies to defend the company against malicious and fraudulent attacks. The team concluded that, unlike a typical game-theory situation, both players do not have the something to gain. The best case scenario for the defender is to minimize losses. The defender’s goal in this game should be to spend the least amount of money while attempting to make the game end as quickly as possible. The best way to do this is to ensure that the attacker never makes any money over a repeated game, but not to waste money defending extra vectors. This logic dominates the thinking for the MUCM model. This model was successful in several different scenarios, detailed in Section \ref{part3}.
 \par
-With a Deterministic Adversary with Memory (DAM) model, the team evaluated situations where the attacker and defender each pick a single attack vector per turn. Both players store M memories of previous choices of attach vectors. Through solutions explored in detail below, the team determined that the best choice for CactusCard Credit is to pick the defense vector from memory. Ultimately, however, the team recommends not allocating defense resources to a DAM model strategy.
+With a Deterministic Adversary with Memory (DAM) model, the team evaluated situations where the attacker and defender each pick a single attack vector per turn. Both players store previous choices of attack vectors. The team determined that the best choice for CactusCard Credit is to pick the defense vector from memory. Ultimately, however, the team recommends not allocating defense resources to a DAM model strategy.
 \par
-Ultimately, the findings expressed in the study below will benefit CactusCard Credit in multiple ways. By implementing the proposals below, the team believes it will be able to increase the marketing effectiveness of the company, ensure the accuracy of credit issuance decisions, and counter potential fraudulent threats. These decisions will be critical to the future success of the company.
+A third model, based on the DAM model, is an improvement over the DAM model by allowing the attacker and defender to pick more than one vector, but never more than the allowed memory, per round similar to how MUCM picks strategies. It also makes the cost per attack a non-static parameter.
+\par
+The findings expressed in the study below will benefit CactusCard Credit in multiple ways. By implementing the proposals below, the team believes it will be able to increase the marketing effectiveness of the company, ensure the accuracy of credit issuance decisions, and counter potential fraudulent threats. These decisions will be critical to the future success of the company.
 \end{abstract}
 \newpage
 
@@ -214,7 +216,7 @@ Overall the defender performs very poorly in the base DAM model. In the best cas
 0.75 & 1.8	& 17.2	& 35.1	& 57.7	& 74.3	\\ \hline
 1.0  & 0.2	& 23.5	& 46.0	& 71.2	& 100.5	\\ \hline
 \end{tabular}} \quad
-\caption{Average number of attacks successfully defended (out of 500) attacks by varying S parameters}
+\caption{Average number of attacks successfully defended (out of 500 attacks) by varying S parameters}
 \end{table}
 
 Since our proposed alternative strategy was for the defender to simply always pick from memory no further testing was needed. This table not only shows the performance of our base model, but also the performance of our proposed alternative strategy for the defender. Although our alternative model no longer requires an S parameter, its performance can be accurately represented by the table when the defenders S parameter equals 1.0.
@@ -224,7 +226,7 @@ Based on these results, the team does not recommend using a defender strategy th
 
 \subsection{MUCM}
 
-\par Whenever this game is played, CactusCard can not make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amount of time possible. The most cost-effective way to make sure the game isn't played very longly is to make sure the attacker isn't making any money, and then minimizing our cost while still ensuring that the attacker isn't making money.
+\par Whenever this game is played, CactusCard cannot make money. Since CactusCard can only lose money, the goal then is to make sure that the game is played for the shortest amount of time possible. The most cost-effective way to make sure the game is not played very long is to make sure the attacker is not making any money, and then minimizing our cost while still ensuring that the attacker is not making money.
 
 \par So the goal is to defend the number of attacks that will maximize his losses and minimize the money we spend. 
 
@@ -302,22 +304,23 @@ This will average out to an expected value of -\$3227.76 for the attacker and -\
 Overall, the reasonable investment for the company entirely depends on the amount of attack vectors that the attacker decides to play. The fewer he plays, the more expensive it is for the company.
 
 \subsection{New Model}
-A new implementation, combining aspects of the MUCM and DAM consists of seting up the model similar to the DAM. Instead of a static cost per attack vector, use parameters for cost $C_{atk}{*}$ and $C_{def}{*}$ for the attacker and CactusCard, respectively.
+A new implementation, combining aspects of the MUCM and DAM consists of setting up the model similar to the DAM. Instead of a static cost per attack vector, use parameters for cost $C_{atk}{*}$ and $C_{def}{*}$ for the attacker and CactusCard, respectively.
 \par
 A second change is to select $X_{atk}$ vectors, where $X_{atk} \leq M_{atk}$ and chosen randomly. The probability of selecting one of the previous $M_{atk}$ moves is then given by
-\[S_{atk} - \prod_{i=1}^{X_{atk}} \frac{M_{atk}-i}{M_{atk}}\]
+\[S_{atk} - \prod_{i=0}^{X_{atk}-1} \frac{M_{atk}-(i+1)}{M_{atk}-i}\]
 The probability of picking a move not in memory is still $1-S_{atk}$ (uniformly at random). The defense is the same as the attack, but replacing $S_{atk}$, $X_{atk}$, $M_{atk}$ with $S_{def}$, $X_{def}$, $M_{def}$
 \par
 This model is no longer limited in the same way as the DAM because it no longer selects only one attack vector in each round $N$. Instead, it selects a random number of attack vectors from vectors in its memory and from vectors not in its memory. This is a more complex model that better encapsulates the idea that attackers are not restricted to only one attack vector. It still relies on memory $M_{atk}$ and $M_{def}$, and it gives greater freedom to choose parameters $C_{atk}*$ and $C_{def}*$ which can better represent actual costs, rather than using a static value.
 \par
-A successful attack for the attacker has payoff \[SP_{atk} = B_{atk} -\sum_{v \in V_{atk}} C_{atk}*\]
-For the defense, a successful attack has payoff \[SP_{def} = -B_{atk} -\sum_{v \in V_{def}} C_{def}*\]
+A successful attack for the attacker has payoff \[S.P_{atk} = B_{atk} -\sum_{v \in V_{atk}} C_{atk}*\] 
 \par
-Unsuccessful attacks have payoffs \[UP_{atk} = -\sum_{v \in V_{atk}} C_{atk}*\] \[UP_{def} = -\sum_{v \in V_{def}} C_{def}*\] for the attacker and defender, respectively. In these payoffs, $V_{atk}$ and $V_{def}$ are each of the vectors used by the attacker and defender.
+For the defense, a successful attack has payoff \[S.P_{def} = -B_{atk} -\sum_{v \in V_{def}} C_{def}*\]
+\par
+Unsuccessful attacks have payoffs \[U.P_{atk} = -\sum_{v \in V_{atk}} C_{atk}*\] \[U.P_{def} = -\sum_{v \in V_{def}} C_{def}*\] for the attacker and defender, respectively. In these payoffs, $V_{atk}$ and $V_{def}$ are each of the vectors used by the attacker and defender.
 \par
 The payoff matrix for this new model for a successful attack or successful defense relies on whether $V_{atk} \cap V_{def} = \emptyset$ for Case 1, or $V_{atk} \cap V_{def} \neq \emptyset$ for Case 2. Using the definition of independence of sets in a probability space $P(A \cap B) = P(A)\cdot P(B)$
 \[P( V_{atk} \cap V_{def}) =\]
-\[ V^2 ( S_{atk} - \prod_{i=1}^{X_{atk}} \frac{M_{atk}-i}{M_{atk}}) ( S_{def} - \prod_{j=1}^{X_{def}} \frac{M_{def}-j}{M_{def}}) \]
+\[ V^2 ( 1 - \prod_{i=0}^{X_{atk}-1} \frac{M_{atk}-(i+1)}{M_{atk}-i}) ( 1 - \prod_{j=0}^{X_{def}-1} \frac{M_{def}-(j+1)}{M_{def}-j}) \]
 
 Combining these probabilities and the payoffs gives the payoff matrix for this new model.
  \begin{table}[H]
@@ -325,8 +328,8 @@ Combining these probabilities and the payoffs gives the payoff matrix for this n
 \begin{tabular}{ |l |l | l | }
 \hline
 Payoffs & Case 1  & Case 2  \\ \hline
-Attacker & $P(V_{atk}\cap V_{def})(SP_{atk})$ & $(1-P(V_{atk}\cap V_{def}))(UP_{atk})$    \\ \hline
- Defender  & $P(V_{atk}\cap V_{def})(SP_{def})$ & $(1-P(V_{atk}\cap V_{def}))(UP_{def})$  \\ \hline
+Attacker & $P(V_{atk}\cap V_{def})(S.P_{atk})$ & $(1-P(V_{atk}\cap V_{def}))(U.P_{atk})$    \\ \hline
+ Defender  & $P(V_{atk}\cap V_{def})(S.P_{def})$ & $(1-P(V_{atk}\cap V_{def}))(U.P_{def})$  \\ \hline
 
 \end{tabular}} \quad
 \caption{A table showing the payoff matrix using the combined model of MUCM and DAM} 
@@ -346,7 +349,7 @@ The source code for this assignment can be found at:
 
 
 \section*{Work}
-All team members contributed significantly to the project. Ben Roos worked on Part 1. David Ganey and Kerry Martin worked on Part 2. Evan Stoll and Michael Theut worked on Part 3. All team members contributed to the writeup and the presentation slides.
+All team members contributed significantly to the project. Ben Roos worked on Part 1. David Ganey and Kerry Martin worked on Part 2. Evan Stoll and Michael Theut worked on Part 3. All team members contributed to the write-up and the presentation slides.
 
 
 \begin{thebibliography}{1}
