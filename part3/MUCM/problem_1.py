@@ -38,7 +38,7 @@ if xdef < 100 and xatk < 99:
 		i = i + 1
 	
 	prob = 1 - ans
-	print "\nLikelyhood of successful defense: {0:.2f}%".format( (prob) * 100)
+	print "\nLikelyhood of successful defense: {:.2%}".format(prob)
 
 
 sa = float(Batk - xatk * Catk)
